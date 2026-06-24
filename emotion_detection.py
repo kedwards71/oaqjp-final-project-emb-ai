@@ -23,4 +23,27 @@ def emotion_detector(text_to_analyze):
     # Post request to the API using heads and text
     response = requests.post(url=url,json=myobj,headers=header)
     # Response text from the URL
-    return json.loads(response.text)
+    emotions = json.loads(response.text)['emotionPredictions'][0]['emotion']
+
+    # Dictionary containing an emotion name and score
+    # Default is 0
+    dominant_emotion = {
+        'name' : '',
+        'score' : 0
+    }
+
+    #Searches for dominant emotion by comparing scores
+    for emotion in emotions:
+        if emotions[emotion] > dominant_emotion['score']:
+            dominant_emotion['score'] = emotions[emotion]
+            dominant_emotion['name'] = emotion
+
+    emotion_scores = {
+        'anger' : emotions['anger'],
+        'disgust' : emotions['disgust'],
+        'fear' : emotions['fear'],
+        'joy' : emotions['joy'],
+        'sadness' : emotions['sadness'],
+        'dominant_emotion' : dominant_emotion['name']
+    }
+    return emotion_scores
