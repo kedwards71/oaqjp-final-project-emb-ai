@@ -14,6 +14,7 @@ def emotion_detector(text_to_analyze):
     Takes a string as input
     Outputs a responsed predicting likelihood of an emmotion
     """
+    print('Emotion Detector Function')
     # Url of Emotion Predict service
     url = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
     # Header required for API service
