@@ -19,6 +19,7 @@ def emotion_detector(text_to_analyze):
     myobj = {"raw_document":{"text":text_to_analyze}}
     # Post request to the API using heads and text
     response = requests.post(url=url,json=myobj,headers=header)
+    return response
 # URL: 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
 # Headers: {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
 # Input json: { "raw_document": { "text": text_to_analyze } }
