@@ -14,7 +14,6 @@ def emotion_detector(text_to_analyze):
     Takes a string as input
     Outputs a responsed predicting likelihood of an emmotion
     """
-    print('Emotion Detector Function')
     # Url of Emotion Predict service
     url = 'https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
     # Header required for API service
@@ -23,6 +22,11 @@ def emotion_detector(text_to_analyze):
     myobj = {"raw_document":{"text":text_to_analyze}}
     # Post request to the API using heads and text
     response = requests.post(url=url,json=myobj,headers=header)
+
+    # 400 code handler
+    if response.status_code == 400:
+        return "Invalid text! Please try again!"
+
     # Response text from the URL
     emotions = json.loads(response.text)['emotionPredictions'][0]['emotion']
 

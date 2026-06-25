@@ -17,7 +17,7 @@ def sent_emotion():
     scores
     """
     text_to_analyze = request.args.get('textToAnalyze')
-    if text_to_analyze and text_to_analyze!= '':
+    if text_to_analyze is not None and text_to_analyze!= '':
         analyzed_text = emotion_detector(text_to_analyze)
         response =(
             "For the given statement, the system response is "
@@ -28,13 +28,15 @@ def sent_emotion():
             + f"'sadness': {analyzed_text['sadness']}. "
             + f"The dominant emotion is <b>{analyzed_text['dominant_emotion']}</b>.")
         return response
-    else:
-        return "Please enter a valid input!"
+    return "Invalid text! Please try again!"
 
 
 
 @app.route('/')
 def index():
+    """
+    Renders the index.html page on the default path
+    """
     return render_template('index.html')
 
 if __name__ == "__main__":
